@@ -35,15 +35,7 @@ class _mainTransactionState extends State<mainTransaction> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      // ignore: prefer_const_literals_to_create_immutables
       children: <Widget>[
-        const Card(
-          color: Colors.blue,
-          elevation: 5,
-          child: Text("Chart"),
-        ),
         addTransaction(_addNewTransaction),
         TransactionList(transactions),
       ],

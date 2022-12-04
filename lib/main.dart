@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Personal Expenses',
       home: MyHomePage(),
     );
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,19 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Personal Expenses"),
         ),
-        body: mainTransaction());
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: const <Widget>[
+              Card(
+                color: Colors.blue,
+                elevation: 5,
+                child: Text("Chart"),
+              ),
+              mainTransaction()
+            ],
+          ),
+        ));
   }
 }
