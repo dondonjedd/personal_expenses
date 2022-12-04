@@ -16,10 +16,13 @@ class addTransaction extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextField(
+              decoration: const InputDecoration(labelText: "Title"),
               controller: titleController,
             ),
             TextField(
+              decoration: const InputDecoration(labelText: "Amount"),
               controller: amountController,
+              keyboardType: TextInputType.number,
             ),
             TextButton(
               onPressed: () => addTransactionCallback(
