@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.green,
             accentColor: Colors.brown,
           ),
-          fontFamily: "QuickSand",
+          // fontFamily: "QuickSand",
           textTheme: ThemeData.light().textTheme.copyWith(
               titleLarge: const TextStyle(
                   fontFamily: 'OpenSans',
@@ -48,6 +48,13 @@ class _MyHomePageState extends State<MyHomePage> {
     transaction(
         id: '0', title: "shopping", amount: 30.59, date: DateTime.now()),
     transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
+    // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
+    // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
+    // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
+    // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
+    // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
+    // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
+    // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
   ];
 
   _addNewTransaction(
