@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/widgets/main_transaction.dart';
-import 'package:personal_expenses/widgets/transaction_list.dart';
-import 'models/transaction.dart';
-import 'package:personal_expenses/widgets/add_transaction.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,22 +24,34 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Personal Expenses"),
+      appBar: AppBar(
+        title: const Text("Personal Expenses"),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {},
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: const <Widget>[
+            Card(
+              color: Colors.blue,
+              elevation: 5,
+              child: Text("Chart"),
+            ),
+            mainTransaction()
+          ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: const <Widget>[
-              Card(
-                color: Colors.blue,
-                elevation: 5,
-                child: Text("Chart"),
-              ),
-              mainTransaction()
-            ],
-          ),
-        ));
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }
