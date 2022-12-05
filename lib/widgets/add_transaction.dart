@@ -10,7 +10,6 @@ class AddTransaction extends StatefulWidget {
 
 class _AddTransactionState extends State<AddTransaction> {
   final titleController = TextEditingController();
-
   final amountController = TextEditingController();
 
   submitData() {
@@ -45,12 +44,22 @@ class _AddTransactionState extends State<AddTransaction> {
               keyboardType: TextInputType.number,
               onSubmitted: (_) => submitData(),
             ),
-            TextButton(
+            Row(
+              children: [
+                const Text("No date chosen"),
+                TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Choose a date",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary),
+                    )),
+              ],
+            ),
+            ElevatedButton(
               onPressed: submitData,
-              style: ElevatedButton.styleFrom(
-                  foregroundColor: Theme.of(context).colorScheme.primary),
               child: const Text("Add Transaction"),
-            )
+            ),
           ],
         ),
       ),
