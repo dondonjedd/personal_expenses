@@ -32,7 +32,7 @@ class Chart extends StatelessWidget {
         "amount": totalSum,
         "percentage": totalSum / totalPreviousWeek()
       };
-    });
+    }).reversed.toList();
   }
 
   @override
