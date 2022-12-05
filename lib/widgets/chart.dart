@@ -25,10 +25,15 @@ class Chart extends StatelessWidget {
           totalSum += tx.amount;
         }
       }
+      double percentage = 0;
+      totalPreviousWeek() == 0
+          ? percentage = 0
+          : percentage = totalSum / totalPreviousWeek();
+
       return {
         "day": DateFormat.E().format(date).toString().substring(0, 2),
         "amount": totalSum,
-        "percentage": totalSum / totalPreviousWeek()
+        "percentage": percentage,
       };
     }).reversed.toList();
   }

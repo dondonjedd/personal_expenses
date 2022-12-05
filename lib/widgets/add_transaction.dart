@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AddTransaction extends StatefulWidget {
   final Function addTransactionCallback;
@@ -11,14 +12,17 @@ class AddTransaction extends StatefulWidget {
 class _AddTransactionState extends State<AddTransaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  late DateTime _chosenDate;
+  DateTime? _chosenDate;
 
   submitData() {
-    final enteredTitle = _titleController.text;
-    final enteredAmount = double.parse(_amountController.text);
-    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+    if (_titleController.text.isEmpty ||
+        double.parse(_amountController.text) <= 0 ||
+        _chosenDate == null) {
       return;
     }
+
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
 
     widget.addTransactionCallback(enteredTitle, enteredAmount, _chosenDate);
 
@@ -35,7 +39,9 @@ class _AddTransactionState extends State<AddTransaction> {
       if (value == null) {
         return;
       }
-      _chosenDate = value;
+      setState(() {
+        _chosenDate = value;
+      });
     });
   }
 
@@ -61,7 +67,9 @@ class _AddTransactionState extends State<AddTransaction> {
             ),
             Row(
               children: [
-                const Text("No date chosen"),
+                _chosenDate == null
+                    ? const Text("No date chosen")
+                    : Text(DateFormat.yMd().format(_chosenDate!)),
                 TextButton(
                     onPressed: _presentDatePicker,
                     child: Text(

@@ -5,49 +5,34 @@ import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<transaction> transactions;
+  final Function deleteTxCallback;
 
-  const TransactionList(this.transactions, {super.key});
+  const TransactionList(this.transactions, this.deleteTxCallback, {super.key});
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 370,
       child: transactions.isEmpty
-          ? Column(
-              children: [
-                Text(
-                  "No Transactions Available",
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  height: 400,
-                  child: Image.asset(
-                    "assets/images/cat_waiting.jpg",
-                    fit: BoxFit.cover,
+          ? SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text(
+                    "No Transactions Available",
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
-                )
-              ],
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 200,
+                    child: Image.asset(
+                      "assets/images/cat_waiting.jpg",
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                ],
+              ),
             )
           : ListView.builder(
               itemBuilder: (ctx, index) {
-                // return Slidable(
-                //   direction: Axis.horizontal,
-                //   closeOnScroll: true,
-                //   endActionPane: const ActionPane(
-                //     extentRatio: 0.2,
-                //     motion: ScrollMotion(),
-                //     children: [
-                //       SlidableAction(
-                //         borderRadius: BorderRadius.all(Radius.circular(10)),
-                //         onPressed: null,
-                //         backgroundColor: Color(0xFFFE4A49),
-                //         foregroundColor: Colors.white,
-                //         icon: Icons.delete,
-                //         label: 'Delete',
-                //       ),
-                //     ],
-                //   ),
-                // child:
                 return Card(
                   elevation: 5,
                   margin:
@@ -55,13 +40,14 @@ class TransactionList extends StatelessWidget {
                   child: Slidable(
                     direction: Axis.horizontal,
                     closeOnScroll: true,
-                    endActionPane: const ActionPane(
+                    endActionPane: ActionPane(
                       extentRatio: 0.2,
-                      motion: ScrollMotion(),
+                      motion: const ScrollMotion(),
                       children: [
                         SlidableAction(
-                          onPressed: null,
-                          backgroundColor: Color(0xFFFE4A49),
+                          onPressed: (_) =>
+                              deleteTxCallback(transactions[index].id),
+                          backgroundColor: const Color(0xFFFE4A49),
                           foregroundColor: Colors.white,
                           icon: Icons.delete,
                           label: 'Delete',
