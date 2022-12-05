@@ -9,19 +9,34 @@ class AddTransaction extends StatefulWidget {
 }
 
 class _AddTransactionState extends State<AddTransaction> {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
+  late DateTime _chosenDate;
 
   submitData() {
-    final enteredTitle = titleController.text;
-    final enteredAmount = double.parse(amountController.text);
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
     if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
 
-    widget.addTransactionCallback(enteredTitle, enteredAmount);
+    widget.addTransactionCallback(enteredTitle, enteredAmount, _chosenDate);
 
     Navigator.of(context).pop();
+  }
+
+  _presentDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(DateTime.now().year),
+            lastDate: DateTime.now())
+        .then((value) {
+      if (value == null) {
+        return;
+      }
+      _chosenDate = value;
+    });
   }
 
   @override
@@ -35,12 +50,12 @@ class _AddTransactionState extends State<AddTransaction> {
           children: [
             TextField(
               decoration: const InputDecoration(labelText: "Title"),
-              controller: titleController,
+              controller: _titleController,
               onSubmitted: (_) => submitData(),
             ),
             TextField(
               decoration: const InputDecoration(labelText: "Amount"),
-              controller: amountController,
+              controller: _amountController,
               keyboardType: TextInputType.number,
               onSubmitted: (_) => submitData(),
             ),
@@ -48,7 +63,7 @@ class _AddTransactionState extends State<AddTransaction> {
               children: [
                 const Text("No date chosen"),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: _presentDatePicker,
                     child: Text(
                       "Choose a date",
                       style: TextStyle(

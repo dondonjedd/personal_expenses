@@ -66,15 +66,12 @@ class _MyHomePageState extends State<MyHomePage> {
     // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
   ];
 
-  _addNewTransaction(
-    titleUser,
-    amountUser,
-  ) {
+  _addNewTransaction(titleUser, amountUser, dateUser) {
     final newTx = transaction(
         id: DateTime.now().toString(),
         title: titleUser,
         amount: amountUser,
-        date: DateTime.now());
+        date: dateUser);
 
     setState(() {
       transactions.add(newTx);

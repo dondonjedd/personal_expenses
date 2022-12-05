@@ -25,8 +25,6 @@ class Chart extends StatelessWidget {
           totalSum += tx.amount;
         }
       }
-      print(totalPreviousWeek());
-      print(totalSum / totalPreviousWeek());
       return {
         "day": DateFormat.E().format(date).toString().substring(0, 2),
         "amount": totalSum,
