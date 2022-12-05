@@ -15,16 +15,14 @@ class _AddTransactionState extends State<AddTransaction> {
   DateTime? _chosenDate;
 
   submitData() {
-    if (_titleController.text.isEmpty ||
-        double.parse(_amountController.text) <= 0 ||
-        _chosenDate == null) {
+    final enteredTitle = _titleController.text;
+    final enteredAmount = _amountController.text;
+    if (enteredTitle.isEmpty || enteredAmount.isEmpty || _chosenDate == null) {
       return;
     }
 
-    final enteredTitle = _titleController.text;
-    final enteredAmount = double.parse(_amountController.text);
-
-    widget.addTransactionCallback(enteredTitle, enteredAmount, _chosenDate);
+    widget.addTransactionCallback(
+        enteredTitle, double.parse(enteredAmount), _chosenDate);
 
     Navigator.of(context).pop();
   }
