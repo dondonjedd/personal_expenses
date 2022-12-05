@@ -8,6 +8,12 @@ class Chart extends StatelessWidget {
 
   const Chart(this.recentTransactions, {super.key});
 
+  double totalPreviousWeek() {
+    return recentTransactions.fold(0, (sum, element) {
+      return sum + element.amount;
+    });
+  }
+
   List<Map<String, Object>> groupedTransactions() {
     return List.generate(7, (index) {
       var date = DateTime.now().subtract(Duration(days: index));
@@ -19,9 +25,12 @@ class Chart extends StatelessWidget {
           totalSum += tx.amount;
         }
       }
+      print(totalPreviousWeek());
+      print(totalSum / totalPreviousWeek());
       return {
         "day": DateFormat.E().format(date).toString().substring(0, 2),
-        "amount": totalSum
+        "amount": totalSum,
+        "percentage": totalSum / totalPreviousWeek()
       };
     });
   }
@@ -35,7 +44,7 @@ class Chart extends StatelessWidget {
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: groupedTransactions().map((tx) {
-                return ChartBar(tx);
+                return Flexible(fit: FlexFit.tight, child: ChartBar(tx));
               }).toList()),
         ));
   }

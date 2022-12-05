@@ -49,8 +49,16 @@ class _MyHomePageState extends State<MyHomePage> {
     transaction(
         id: '0', title: "shopping", amount: 30.59, date: DateTime.now()),
     transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
-    // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
-    // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
+    transaction(
+        id: '1',
+        title: "futsal",
+        amount: 30.99,
+        date: DateTime.now().subtract(const Duration(days: 1))),
+    transaction(
+        id: '1',
+        title: "futsal",
+        amount: 5.99,
+        date: DateTime.now().subtract(const Duration(days: 2))),
     // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
     // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
     // transaction(id: '1', title: "futsal", amount: 15.99, date: DateTime.now()),
@@ -81,6 +89,13 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  List<transaction> recentTransactions() {
+    return transactions
+        .where((element) => element.date
+            .isAfter(DateTime.now().subtract(const Duration(days: 7))))
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(transactions),
+            Chart(recentTransactions()),
             TransactionList(transactions),
           ],
         ),
