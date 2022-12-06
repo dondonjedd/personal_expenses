@@ -10,14 +10,14 @@ class ChartBar extends StatelessWidget {
       return Column(
         children: [
           SizedBox(
-            height: constraints.maxHeight * 0.15,
+            height: constraints.maxHeight * 0.2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Flexible(flex: 1, child: FittedBox(child: Text("RM"))),
                 Flexible(
-                  flex: 3,
+                  flex: 2,
                   child: FittedBox(
                       child: Text((tx["amount"] as double).toStringAsFixed(0))),
                 ),
@@ -55,9 +55,6 @@ class ChartBar extends StatelessWidget {
                 )
               ],
             ),
-          ),
-          SizedBox(
-            height: constraints.maxHeight * 0.05,
           ),
           SizedBox(
               height: constraints.maxHeight * 0.1,
