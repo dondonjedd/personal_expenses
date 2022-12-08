@@ -1,7 +1,12 @@
-# personal_expenses
+# Personal expenses
 
-First project in Udemy Course
+Application which helps users keep track of their personal expenses for the last 7 days
 
-## Description
+## Key features
 
-Helps keep track of your personal expenses for the last 7 days
+- Add any payment made by specifying title, amount and date
+- View spendings for the last 7 days in a chart
+- View all payments made in a list
+  - payments are deletable
+
+
